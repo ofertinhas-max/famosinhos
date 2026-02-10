@@ -2,3 +2,5 @@ node_modules/
 .env
 *.db
 *.log
+# Backup da VPS: deve entrar no repo para o deploy usar como seed
+!db/loja-vps-antiga.db
