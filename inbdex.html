@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="pt-BR">
+
+<head>
+  <!-- xxx -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+  <!-- Prevent Search Engine Indexing -->
+  <meta name="robots" content="noindex, nofollow">
+
+  <!-- CSP Endurecido - Bloqueia XSS mas permite dependências necessárias -->
+  <meta http-equiv="Content-Security-Policy" content="
+    default-src 'self';
+    script-src 'self' 'unsafe-inline'
+      https://cdnjs.cloudflare.com
+      https://t.contentsquare.net
+      https://api.sandbox.hopysplit.com.br
+      https://api.conta.paybeehive.com.br
+      https://7105.api.greenapi.com
+      https://analytics.tiktok.com
+      https://static.cloudflareinsights.com;
+    script-src-elem 'self' 'unsafe-inline'
+      https://cdnjs.cloudflare.com
+      https://t.contentsquare.net
+      https://api.sandbox.hopysplit.com.br
+      https://analytics.tiktok.com
+      https://static.cloudflareinsights.com;
+    style-src 'self' 'unsafe-inline'
+      https://cdnjs.cloudflare.com
+      https://fonts.googleapis.com;
+    img-src 'self' https: data: blob:;
+    font-src 'self'
+      https://cdnjs.cloudflare.com
+      https://fonts.gstatic.com
+      data:;
+    connect-src 'self'
+      https://api.sandbox.hopysplit.com.br
+      https://api.conta.paybeehive.com.br
+      https://analytics.tiktok.com
+      https:
+      wss:;
+    frame-src 'self'
+      https://api.sandbox.hopysplit.com.br
+      https://api.conta.paybeehive.com.br;
+    media-src 'self'
+      https://*.vod.susercontent.com
+      blob:;
+    child-src 'self' blob:;
+    object-src 'none';
+    base-uri 'self';
+    form-action 'self';
+  ">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- Pixels do painel: carrega TikTok ativos e injeta SDK (ordem por configuração); Purchase será enviado via webhook no gateway -->
+  <script>
+  (function(){
+    window.__TIKTOK_PIXEL_IDS__ = [];
+    fetch('/api/db/tracking-scripts/active').then(function(r){ return r.json(); }).then(function(rows){
+      if (!Array.isArray(rows) || rows.length === 0) return;
+      var tiktok = rows.filter(function(r){ return (r.tipo || 'tiktok') === 'tiktok' && (r.codigo || r.script || '').toString().trim(); });
+      tiktok.sort(function(a,b){ return (a.ordem||0) - (b.ordem||0) || (a.id||0) - (b.id||0); });
+      var ids = tiktok.map(function(r){ return (r.codigo || r.script || '').toString().trim(); }).filter(Boolean);
+      if (ids.length === 0) return;
+      window.__TIKTOK_PIXEL_IDS__ = ids;
+      var s = document.createElement('script');
+      s.src = 'https://analytics.tiktok.com/i18n/pixel/sdk.js';
+      s.async = true;
+      s.onload = function(){ try { ids.forEach(function(id){ if (window.ttq) window.ttq.load(id); }); } catch(e){} };
+      document.head.appendChild(s);
+    }).catch(function(){});
+  })();
+  </script>
+  <script type="module" crossorigin src="/assets/index-Z_n8MByG.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-BAETThjf.css">
+</head>
+
+<body>
+  <div id="root"></div>
+</body>
+
+</html>
