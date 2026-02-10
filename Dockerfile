@@ -12,5 +12,5 @@ RUN cd backend && npm install --omit=dev
 ENV NODE_ENV=production
 EXPOSE 3000
 
-# Inicializa o banco (cria tabelas se não existirem) e sobe o servidor
-CMD ["sh", "-c", "node backend/db/init.js && node backend/server.js"]
+# Se não existir loja.db (volume novo), usa o backup da VPS antiga; depois init (migrações) e sobe o servidor
+CMD ["sh", "-c", "if [ ! -f backend/db/loja.db ]; then cp backend/db/loja-vps-antiga.db backend/db/loja.db && echo 'Banco inicializado a partir de loja-vps-antiga.db'; fi && node backend/db/init.js && node backend/server.js"]

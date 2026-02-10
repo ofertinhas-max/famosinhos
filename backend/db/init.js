@@ -193,5 +193,17 @@ try {
   }
 } catch (_) { /* ignora */ }
 
+// Seed de produtos de exemplo só se a tabela estiver vazia (primeira instalação)
+const countProdutos = db.prepare('SELECT COUNT(*) as c FROM produtos').get();
+if (countProdutos && countProdutos.c === 0) {
+  db.prepare(`
+    INSERT INTO produtos (nome, descricao, preco, preco_antigo, imagem, estoque, principal, vendas, ativo, frete_gratis, oculto)
+    VALUES
+    ('Produto exemplo 1', 'Descrição do primeiro produto. Edite ou adicione mais pelo painel admin.', 29.90, 39.90, '', 100, 1, 0, 1, 0, 0),
+    ('Produto exemplo 2', 'Segundo produto de exemplo. Use Exportar/Importar no admin para trazer seus produtos da VPS antiga.', 49.90, null, '', 50, 0, 0, 1, 0, 0)
+  `).run();
+  console.log('Seed: 2 produtos de exemplo criados.');
+}
+
 console.log('Banco inicializado em', dbPath);
 db.close();
