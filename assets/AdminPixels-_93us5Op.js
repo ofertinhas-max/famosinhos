@@ -8,7 +8,8 @@ function A() {
       , [s,d] = o.useState("")
       , [u,f] = o.useState("tiktok")
       , [a,c] = o.useState("")
-      , [x,p] = o.useState(0);
+      , [x,p] = o.useState(0)
+      , [L,V] = o.useState("");
     o.useEffect( () => {
         if (!localStorage.getItem("app_state")) {
             m("/painelad");
@@ -27,6 +28,7 @@ function A() {
         f("tiktok"),
         c(""),
         p(h.length),
+        V(""),
         t(!0)
     }
       , k = i => {
@@ -35,6 +37,7 @@ function A() {
         f(i.tipo),
         c(i.codigo),
         p(i.ordem || 0),
+        V(i.access_token || ""),
         t(!0)
     }
       , v = i => /^[a-zA-Z0-9]{1,50}$/.test(i)
@@ -51,12 +54,14 @@ function A() {
             nome: s,
             tipo: u,
             codigo: a,
+            access_token: L || "",
             ativo: r.ativo,
             ordem: parseInt(x) || 0
         }) : await n.insertTrackingScript({
             nome: s,
             tipo: u,
             codigo: a,
+            access_token: L || "",
             ativo: !0,
             ordem: parseInt(x) || 0
         }),
@@ -349,6 +354,39 @@ function A() {
                                     fontSize: "12px"
                                 },
                                 children: ["Apenas letras e números, máximo 50 caracteres (", a.length, "/50)"]
+                            })]
+                        }), e.jsxs("div", {
+                            children: [e.jsx("label", {
+                                style: {
+                                    display: "block",
+                                    fontSize: "14px",
+                                    fontWeight: "600",
+                                    color: "#1a1a1a",
+                                    marginBottom: "8px"
+                                },
+                                children: "Access Token (Events API – opcional)"
+                            }), e.jsx("input", {
+                                type: "password",
+                                value: L,
+                                onChange: i => V(i.target.value),
+                                placeholder: "Token para envio server-side (CompletePayment)",
+                                style: {
+                                    fontSize: "14px",
+                                    padding: "12px 16px",
+                                    borderRadius: "8px",
+                                    border: "1.5px solid #e0e0e0",
+                                    width: "100%",
+                                    transition: "border-color 0.2s",
+                                    fontFamily: "monospace"
+                                }
+                            }), e.jsx("small", {
+                                style: {
+                                    display: "block",
+                                    marginTop: "6px",
+                                    color: "#666",
+                                    fontSize: "12px"
+                                },
+                                children: "Necessário para registrar Purchase (conversão) via Events API quando o PIX for confirmado."
                             })]
                         }), e.jsxs("div", {
                             children: [e.jsx("label", {
