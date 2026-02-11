@@ -27051,17 +27051,23 @@ function y1() {
                       G.log(
                         "🎉 [PixPayment] Redirecionando para página de sucesso...",
                       ),
-                      typeof window.ttq === "object" &&
+                      (typeof window.ttq === "object" &&
                         typeof window.ttq.track === "function" &&
-                        window.ttq.track("CompletePayment", {
+                        (window.ttq.track("CompletePayment", {
                           value: Number(s?.total) || 0,
                           currency: "BRL",
                           content_id: String(c),
                           event_id: "purchase_" + ce,
                         }),
-                      localStorage.removeItem("transaction_id"),
-                      localStorage.removeItem("pedido-atual"),
-                      i(`/sucesso/${c}`))
+                        G.log("📤 [PixPayment] TikTok CompletePayment enviado (event_id: purchase_" + ce + ")"))),
+                      setTimeout(
+                        () => (
+                          localStorage.removeItem("transaction_id"),
+                          localStorage.removeItem("pedido-atual"),
+                          i(`/sucesso/${c}`)
+                        ),
+                        450
+                      ))
                     : G.log(
                         "⏳ [PixPayment] Status inicial:",
                         E.transaction.status,
@@ -27101,18 +27107,24 @@ function y1() {
                           console.log(
                             "🎉 [PixPayment] Redirecionando para página de sucesso...",
                           ),
-                          typeof window.ttq === "object" &&
+                          (typeof window.ttq === "object" &&
                             typeof window.ttq.track === "function" &&
-                            window.ttq.track("CompletePayment", {
+                            (window.ttq.track("CompletePayment", {
                               value: Number(s?.total) || 0,
                               currency: "BRL",
                               content_id: String(c),
                               event_id: "purchase_" + oe,
                             }),
+                            console.log("📤 [PixPayment] TikTok CompletePayment enviado (event_id: purchase_" + oe + ")"))),
                           clearInterval(A),
-                          localStorage.removeItem("transaction_id"),
-                          localStorage.removeItem("pedido-atual"),
-                          i(`/sucesso/${c}`))
+                          setTimeout(
+                            () => (
+                              localStorage.removeItem("transaction_id"),
+                              localStorage.removeItem("pedido-atual"),
+                              i(`/sucesso/${c}`)
+                            ),
+                            450
+                          ))
                         : le.transaction.status === "expired"
                           ? (console.log(
                               "⏰ [PixPayment] Status EXPIRED via POLLING",
@@ -27164,18 +27176,24 @@ function y1() {
                     console.log(
                       "🎉 [PixPayment] Redirecionando para página de sucesso...",
                     ),
-                    typeof window.ttq === "object" &&
+                    (typeof window.ttq === "object" &&
                       typeof window.ttq.track === "function" &&
-                      window.ttq.track("CompletePayment", {
+                      (window.ttq.track("CompletePayment", {
                         value: Number(s?.total) || 0,
                         currency: "BRL",
                         content_id: String(c),
                         event_id: "purchase_" + oe,
                       }),
+                      console.log("📤 [PixPayment] TikTok CompletePayment enviado (event_id: purchase_" + oe + ")"))),
                     I.close(),
-                    localStorage.removeItem("transaction_id"),
-                    localStorage.removeItem("pedido-atual"),
-                    i(`/sucesso/${c}`))
+                    setTimeout(
+                      () => (
+                        localStorage.removeItem("transaction_id"),
+                        localStorage.removeItem("pedido-atual"),
+                        i(`/sucesso/${c}`)
+                      ),
+                      450
+                    ))
                   : $.status === "expired" || $.status === "cancelado"
                     ? (console.log(
                         "⏰ [PixPayment] Status EXPIRED/CANCELADO via SSE",
@@ -28000,7 +28018,7 @@ function v1() {
                         content_id: String(c),
                         event_id: "purchase_" + A,
                       }),
-                    L(!0))
+                    setTimeout(() => L(!0), 450))
                   : G.log(
                       "⏳ [RecoverPayment] Status inicial:",
                       N.transaction.status,
@@ -28035,9 +28053,8 @@ function v1() {
                             content_id: String(c),
                             event_id: "purchase_" + I,
                           }),
-                        j("paid"),
-                        L(!0),
-                        clearInterval(m))
+                        clearInterval(m),
+                        setTimeout(() => (j("paid"), L(!0)), 450))
                       : ye.transaction.status === "expired" &&
                         (G.log(
                           "⏰ [RecoverPayment] Status EXPIRED via POLLING",
@@ -28069,9 +28086,8 @@ function v1() {
                           content_id: String(c),
                           event_id: "purchase_" + I,
                         }),
-                      j("paid"),
-                      L(!0),
-                      E.close())
+                      E.close(),
+                      setTimeout(() => (j("paid"), L(!0)), 450))
                     : (te.status === "expired" || te.status === "cancelado") &&
                       (G.log(
                         "⏰ [RecoverPayment] Status EXPIRED/CANCELADO via SSE",
