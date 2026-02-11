@@ -127,8 +127,17 @@ router.post('/import', requireAdmin, (req, res) => {
       const newPid = idMap[a.produto_id];
       if (newPid != null) {
         try {
-          db.prepare('INSERT INTO avaliacoes (produto_id, autor, nota, comentario) VALUES (?, ?, ?, ?)')
-            .run(newPid, a.autor || '', a.nota ?? 0, a.comentario || '');
+          db.prepare(`
+            INSERT INTO avaliacoes (produto_id, autor, imagem, imagem_produto, nota, comentario)
+            VALUES (?, ?, ?, ?, ?, ?)
+          `).run(
+            newPid,
+            a.autor || '',
+            a.imagem ?? null,
+            a.imagem_produto ?? null,
+            a.nota ?? 0,
+            a.comentario || ''
+          );
         } catch (_) {}
       }
     }
