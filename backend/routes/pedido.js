@@ -202,12 +202,30 @@ createPixRouter.post('/create-pix', async (req, res) => {
       });
     }
 
+    // Construir utmQuery para o EscalaPay (body espera JSON string)
+    let utmQuery = '';
+    if (typeof b.utmQuery === 'string' && b.utmQuery.trim()) {
+      utmQuery = b.utmQuery.trim();
+    } else if (b.tracking_data && typeof b.tracking_data === 'object') {
+      const td = b.tracking_data;
+      const utmObj = {
+        utm_source: td.utm_source ?? null,
+        utm_medium: td.utm_medium ?? null,
+        utm_campaign: td.utm_campaign ?? null,
+        utm_term: td.utm_term ?? null,
+        utm_content: td.utm_content ?? null
+      };
+      const str = JSON.stringify(utmObj);
+      if (str !== '{}') utmQuery = str;
+    }
+
     console.log('[create-pix] 📦 Criando transação PIX:', {
       valor,
       cliente: cliente_nome,
-      documento: cliente_documento
+      documento: cliente_documento,
+      hasUtmQuery: !!utmQuery
     });
-    
+
     // Chamar gateway EscalaPay para gerar PIX real (NÃO cria pedido aqui)
     const gatewayResponse = await createPixTransaction({
       valor,
@@ -215,7 +233,8 @@ createPixRouter.post('/create-pix', async (req, res) => {
       cliente_nome,
       cliente_email,
       cliente_documento,
-      pedidoId: null // Pedido será criado pelo frontend
+      pedidoId: null, // Pedido será criado pelo frontend
+      utmQuery: utmQuery || undefined
     });
     
     console.log('[create-pix] ✅ PIX gerado com sucesso:', {
