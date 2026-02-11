@@ -417,7 +417,7 @@ export async function processWebhook(webhookData) {
           tracking_user_agent:
             pedido.tracking_user_agent || "EscalaPay-Webhook",
         },
-        eventId: `webhook_conversion_${pedido.id}_${Date.now()}`,
+        eventId: `purchase_${transaction_id}`,
         timestamp: Math.floor(Date.now() / 1000),
       })
         .then((results) => {
@@ -545,7 +545,7 @@ export async function processWebhook(webhookData) {
         tracking_ip: pedido.tracking_ip || null,
         tracking_user_agent: pedido.tracking_user_agent || "EscalaPay-Webhook",
       },
-      eventId: `webhook_conversion_${pedido.id}_${Date.now()}`,
+      eventId: `purchase_${transaction_id}`,
       timestamp: Math.floor(Date.now() / 1000),
     })
       .then((results) => {
