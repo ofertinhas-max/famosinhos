@@ -9,7 +9,9 @@ router.get('/avaliacoes/produto/:id', (req, res) => {
   // Retornar apenas avaliações reais do banco de dados
   // Rating do produto é apenas visual e não gera avaliações automáticas
   const rows = db.all('SELECT * FROM avaliacoes WHERE produto_id = ? ORDER BY id DESC', [req.params.id]);
-  res.json(rows);
+  // O admin espera nome_usuario e avatar; o banco usa autor e imagem
+  const out = rows.map(r => ({ ...r, nome_usuario: r.autor, avatar: r.imagem }));
+  res.json(out);
 });
 
 // POST /api/db/avaliacoes
@@ -58,7 +60,8 @@ router.get('/avaliacoes', requireAdmin, (req, res) => {
     LEFT JOIN produtos p ON p.id = a.produto_id
     ORDER BY a.id DESC
   `);
-  res.json(rows);
+  const out = rows.map(r => ({ ...r, nome_usuario: r.autor, avatar: r.imagem }));
+  res.json(out);
 });
 
 // POST /api/db/avaliacoes/automatizar (automação de avaliações)
