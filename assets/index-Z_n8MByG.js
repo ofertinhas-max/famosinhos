@@ -22836,11 +22836,9 @@ function m1() {
           it = vt("_fbp") || Lt,
           kt = vt("_fbc") || mt;
         let tt = null;
-        if (typeof window.ttq < "u" && window.ttq.instance)
+        const _pid = window.__TIKTOK_PIXEL_IDS__ && window.__TIKTOK_PIXEL_IDS__[0];
+        if (_pid && typeof window.ttq < "u" && window.ttq.instance)
           try {
-            const _pid =
-              (window.__TIKTOK_PIXEL_IDS__ && window.__TIKTOK_PIXEL_IDS__[0]) ||
-              "D4R3C53C77UF8D0T7A1G";
             const Ut = window.ttq.instance(_pid);
             Ut && Ut.get && (tt = _pid);
           } catch {
