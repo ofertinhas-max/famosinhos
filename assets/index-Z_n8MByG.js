@@ -14540,6 +14540,8 @@ const kl = () => {
       }),
       typeof window.ttq == "object" &&
         typeof window.ttq.track == "function" &&
+        window.__TIKTOK_PIXEL_IDS__ &&
+        window.__TIKTOK_PIXEL_IDS__.length > 0 &&
         window.ttq.track("ViewContent", {
           content_id: c,
           content_name: s,
@@ -14567,6 +14569,8 @@ const kl = () => {
       }),
       typeof window.ttq == "object" &&
         typeof window.ttq.track == "function" &&
+        window.__TIKTOK_PIXEL_IDS__ &&
+        window.__TIKTOK_PIXEL_IDS__.length > 0 &&
         window.ttq.track("AddToCart", {
           content_id: s,
           content_name: u,
@@ -14595,6 +14599,8 @@ const kl = () => {
       }),
       typeof window.ttq == "object" &&
         typeof window.ttq.track == "function" &&
+        window.__TIKTOK_PIXEL_IDS__ &&
+        window.__TIKTOK_PIXEL_IDS__.length > 0 &&
         window.ttq.track("InitiateCheckout", {
           content_ids: s,
           content_type: "product",
@@ -14611,6 +14617,8 @@ const kl = () => {
         }),
       typeof window.ttq == "object" &&
         typeof window.ttq.track == "function" &&
+        window.__TIKTOK_PIXEL_IDS__ &&
+        window.__TIKTOK_PIXEL_IDS__.length > 0 &&
         window.ttq.track("Search", {
           query: i,
         }));
@@ -14623,6 +14631,8 @@ const kl = () => {
       }),
       typeof window.ttq == "object" &&
         typeof window.ttq.track == "function" &&
+        window.__TIKTOK_PIXEL_IDS__ &&
+        window.__TIKTOK_PIXEL_IDS__.length > 0 &&
         window.ttq.track("AddPaymentInfo", {
           value: i,
           currency: "BRL",
@@ -27051,6 +27061,8 @@ function y1() {
                       ),
                       (typeof window.ttq === "object" &&
                         typeof window.ttq.track === "function" &&
+                        window.__TIKTOK_PIXEL_IDS__ &&
+                        window.__TIKTOK_PIXEL_IDS__.length > 0 &&
                         (window.ttq.track("CompletePayment", {
                           value: Number(s?.total) || 0,
                           currency: "BRL",
@@ -27107,6 +27119,8 @@ function y1() {
                           ),
                           (typeof window.ttq === "object" &&
                             typeof window.ttq.track === "function" &&
+                            window.__TIKTOK_PIXEL_IDS__ &&
+                            window.__TIKTOK_PIXEL_IDS__.length > 0 &&
                             (window.ttq.track("CompletePayment", {
                               value: Number(s?.total) || 0,
                               currency: "BRL",
@@ -27176,6 +27190,8 @@ function y1() {
                     ),
                     (typeof window.ttq === "object" &&
                       typeof window.ttq.track === "function" &&
+                      window.__TIKTOK_PIXEL_IDS__ &&
+                      window.__TIKTOK_PIXEL_IDS__.length > 0 &&
                       (window.ttq.track("CompletePayment", {
                         value: Number(s?.total) || 0,
                         currency: "BRL",
@@ -28010,6 +28026,8 @@ function v1() {
                     ),
                     typeof window.ttq === "object" &&
                       typeof window.ttq.track === "function" &&
+                      window.__TIKTOK_PIXEL_IDS__ &&
+                      window.__TIKTOK_PIXEL_IDS__.length > 0 &&
                       window.ttq.track("CompletePayment", {
                         value: Number(s?.total) || 0,
                         currency: "BRL",
@@ -28045,6 +28063,8 @@ function v1() {
                         ),
                         typeof window.ttq === "object" &&
                           typeof window.ttq.track === "function" &&
+                          window.__TIKTOK_PIXEL_IDS__ &&
+                          window.__TIKTOK_PIXEL_IDS__.length > 0 &&
                           window.ttq.track("CompletePayment", {
                             value: Number(s?.total) || 0,
                             currency: "BRL",
@@ -28078,6 +28098,8 @@ function v1() {
                       ),
                       typeof window.ttq === "object" &&
                         typeof window.ttq.track === "function" &&
+                        window.__TIKTOK_PIXEL_IDS__ &&
+                        window.__TIKTOK_PIXEL_IDS__.length > 0 &&
                         window.ttq.track("CompletePayment", {
                           value: Number(s?.total) || 0,
                           currency: "BRL",
